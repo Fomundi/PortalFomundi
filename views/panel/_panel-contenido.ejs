@@ -1,0 +1,55 @@
+
+  <div class="row text-white">
+    <div class="col-4 col-md-6 mt-3">
+      <h6 class="d-flex justify-content-center">Usuarios</h6>
+      <a type="button" class="btn btn-primary btn-sm txtc" href="">Ver</a>
+    </div>
+    <div class="col-4 col-md-6 mt-3">
+      <h6 class="d-flex justify-content-center">Librerias</h6>
+      <a type="button" class="btn btn-primary btn-sm txtc" href="">Ver</a>
+    </div>
+    <div class="col-4 col-md-6 mt-3">
+      <h6 class="d-flex justify-content-center">Bots</h6>
+      <a type="button" class="btn btn-primary btn-sm txtc" href="">Ver</a>
+    </div>
+    <div class="col-4 col-md-6 mt-3">
+      <h6 class="d-flex justify-content-center">Categorias</h6>
+      <a type="button" class="btn btn-primary btn-sm txtc" href="">Ver</a>
+    </div>
+    <div class="col-4 col-md-6 mt-3">
+      <h6 class="d-flex justify-content-center">Logros</h6>
+      <a type="button" class="btn btn-primary btn-sm txtc" href="">Ver</a>
+    </div>
+    <div class="col-4 col-md-6 mt-3">
+      <h6 class="d-flex justify-content-center">Anuncios</h6>
+      <a type="button" class="btn btn-primary btn-sm txtc" href="">Ver</a>
+    </div>
+  </div>
+  
+  <%- include('_modal'); %>
+  
+  <div class="row text-white">
+    <div class="col-4 col-md-6 mt-3">
+      <form method="POST" id="form_info" action="/panel/insertl">
+        
+        <label for="Libreria" class="form-label">Librería</label>
+        <input name="library" type="text" class="form-control" id="Libreria">
+        
+        <button class="btn btn-success mt-2" type="submit" name="action" onclick="send();">Guardar
+            </button>
+        
+      </form>
+    </div>
+    
+    <div class="col-4 col-md-6 mt-3">
+      <form method="POST" id="form_info" action="/panel/insertc">
+        
+        <label for="categoria" class="form-label">Categoría</label>
+        <input name="category" type="text" class="form-control" id="categoria">
+        
+        <button class="btn btn-success mt-2" type="submit" name="action" onclick="send();">Guardar
+            </button>
+            
+      </form>
+    </div>
+  </div>

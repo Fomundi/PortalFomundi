@@ -1,0 +1,72 @@
+<%- include('_head'); %>
+
+  <%- include('../_lateral'); %>
+
+    <form class="formbots" method="POST" action="/bots/<%=user.id%>/insert">
+      <h3 class="text-center">Ingrese la información de su bot</h3>
+      <label for="basic-url" class="form-label fmbotl">ID DEL BOT</label>
+      <div class="input-group mb-3 fmbot">
+        <input name="idbot" type="text" class="form-control" placeholder="832949134610429175">
+      </div>
+      <div class="col-auto">
+        <span class="form-text">
+          Puedes obtener el ID de su bot en el <a class="link-primary" href="https://discordapp.com/developers/applications/me">Portal de desarrolladores de Discord</a>.
+        </span>
+      </div>
+
+      <label for="basic-url" class="form-label fmbotl">PREFIX</label>
+      <div class="input-group mb-3 fmbot">
+        <input name="prefixb" type="text" class="form-control" placeholder="?">
+      </div>
+
+      <label for="basic-url" class="form-label fmbotl">NOMBRE DEL BOT</label>
+      <div class="input-group mb-3 fmbot">
+        <input name="namebot" type="text" class="form-control" placeholder="Bot Multifuncional">
+      </div>
+
+      <label for="basic-url" class="form-label fmbotl">DESCRIPCIÓN DEL BOT</label>
+      <div class="input-group mb-3 fmbot">
+        <textarea name="desbot" class="form-control" aria-label="With textarea"></textarea>
+      </div>
+
+      <label for="basic-url" class="form-label fmbotl">CATEGORÍA</label>
+      <div class="input-group mb-3">
+        <select name="categoryo" class="form-select fmbot">
+          <% for (var i = 0; i < category.length; i++) { %>
+          <option selected>Selecciona una Categoria</option>
+          <option value="<%= category[i].cname %>"><%= category[i].cname %></option>
+          <% } %>
+        </select>
+      </div>
+
+      <label for="basic-url" class="form-label fmbotl">LIBRERIA</label>
+      <div class="input-group mb-3 fmbot">
+        <select name="libreryo" class="form-select">
+          <% for (var i = 0; i < library.length; i++) { %>
+          <option selected>Selecciona una Librería</option>
+          <option value="<%= library[i].lname %>"><%= library[i].lname %></option>
+          <% } %>
+        </select>
+      </div>
+
+      <label for="basic-url" class="form-label fmbotl">SITIO WEB</label>
+      <div class="input-group mb-3 fmbot">
+        <input name="webb" type="text" class="form-control" placeholder="www.miweb.com">
+      </div>
+
+      <label for="basic-url" class="form-label fmbotl">SERVIDOR DE SOPORTE</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">https://discord.gg/</span>
+        <input name="sbot" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+      </div>
+      
+      <label for="basic-url" class="form-label fmbotl">Invitación <a href="https://discordapi.com/permissions.html">Generador</a></label>
+      <div class="input-group mb-3">
+        <input name="invibot" type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg">Guardar</button>
+
+    </form>
+
+<%- include('_footer'); %>

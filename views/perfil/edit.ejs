@@ -1,0 +1,64 @@
+<%- include('_head'); %>
+
+  <%- include('../_lateral'); %>
+  
+  
+  <form class="col-12 formbots formuserp" method="POST" id="form_info" action="/perfil/<%=user.id%>/update">
+    
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="url">Url Personalizada</span>
+      <input name="urlper" type="text" class="form-control" aria-describedby="url" value="<%= userDB.urlpersonalizada %>">
+    </div>  
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="pais">Ubicación</span>
+      <input name="paci" type="text" class="form-control" aria-describedby="pais" value="<%= userDB.pais_ciudad %>">
+    </div>  
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">Biografía</span>
+      <textarea name="bio" class="form-control" aria-label="With textarea" value="<%= userDB.bio %>"></textarea>
+    </div>
+    
+    <h5>Redes sociales</h5>
+    
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="facebook">Facebook</span>
+      <input name="facebook" type="text" class="form-control" aria-describedby="facebook" value="<%= userDB.facebook %>">
+    </div>  
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="twitter">Twitter</span>
+      <input name="twitter" type="text" class="form-control" aria-describedby="twitter" value="<%= userDB.twitter  %>">
+    </div>  
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="youtube">Youtube</span>
+      <input name="youtube" type="text" class="form-control" aria-describedby="youtube" value="<%= userDB.youtube %>">
+    </div>  
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="web">Web</span>
+      <input name="web" type="text" class="form-control" aria-describedby="web" value="<%= userDB.web %>">
+    </div>  
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="discord">Servidor Discord</span>
+      <input name="discord" type="text" class="form-control" aria-describedby="discord" value="<%= userDB.sdiscord %>">
+    </div>
+    
+    <button type="button submit" class="btn btn-primary btn-lg balign" name="action" onclick="send();">Guardar
+      </button>
+    
+  </form>
+  
+  <div id="pop"></div>
+ 
+
+<script type="text/javascript">
+  function send() {
+    const alert = document.getElementById('pop');
+    alert.innerHTML = `<h2>Actualizando perfil...</h2>`;
+    alert.setAttribute('class', 'alert alert-success');
+    setTimeout(() => {
+      document.getElementById('form_info').submit();
+    }, 3000)
+
+  }
+</script>
+
+<%- include('_footer'); %>

@@ -1,0 +1,67 @@
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="../img/mysatabot.png" alt="" width="60" height="48" class="d-inline-block align-top">
+      PortalFomundi
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/"><span class="iconbox iconl"><i class="fas fa-home iconp"></i></span>Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/guias"><span class="iconbox iconl"><i class="fas fa-book-open iconp"></i></span>Guias</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/roles"><span class="iconbox iconl"><i class="fas fa-hand-sparkles iconp"></i></span>Roles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/usuarios"><span class="iconbox iconl"><i class="fas fa-users iconp"></i></span>Usuarios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/bots"><span class="iconbox iconl"><i class="fas fa-robot iconp"></i></span>Bots</a>
+        </li>
+        
+        <% if(loginp) {%>
+      
+        <li class="nav-item">
+          <a class="nav-link" href="/perfil"><span class="iconbox iconl"><i class="fas fa-user iconp"></i></span><%= user.username %></a></li>
+        
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal"><span class="iconbox iconl"><i class="fas fa-sign-out-alt iconp"></i></span>Salir</a>
+          </li>
+        
+      <% } else { %>
+      
+        <li class="nav-item"><a class="nav-link" href="/login"><span class="iconbox iconl"><i class="fas fa-sign-in-alt iconp"></i></span>Login</a></li>
+        
+      <% } %>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cerrar Sesión</h5>
+      </div>
+      <div class="modal-body">
+        Está segur@ que desea cerrar sesión?
+      </div>
+      <div class="modal-footer">
+        <a type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</a>
+        <a type="button" href="/salir" class="btn btn-primary">Si</a>
+      </div>
+    </div>
+  </div>
+</div>

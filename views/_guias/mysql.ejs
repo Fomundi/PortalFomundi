@@ -1,0 +1,240 @@
+<%- include('../_head'); %>
+
+  <%- include('../_lateral'); %>
+
+    <h3 class="sqltxt">Guia Mysql</h3>
+
+    <div class="acorguia">
+      <div class="accordion" id="EpicExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#one" aria-expanded="true" aria-controls="CollapseOne">
+              Que es Mysql?
+            </button>
+          </h2>
+
+          <div id="one" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              MySQL es un sistema de administración de bases de datos (Database Management System, DBMS) para bases de datos relacionales. Así, MySQL no es más que una aplicación que permite gestionar archivos llamados de bases de datos.
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button">
+              Empezamos con la confirmación
+            </button>
+          </h2>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#two" aria-expanded="true" aria-controls="CollapseOne">
+              Archivo principal (index.js)
+            </button>
+          </h2>
+
+          <div id="two" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              
+              <pre><code class="language-javascript line-numbers">
+                    (async () => {
+                    conn = await require("./database.js");
+                  })();
+                  </code></pre>
+              
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#three" aria-expanded="true" aria-controls="CollapseOne">
+              Creacion y configuración de la base de datos
+            </button>
+          </h2>
+
+          <div id="three" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              Creamos un archivo llamado database.js donde ahí estará la conexion a nuestra base de datos.
+                  <pre><code class="language-javascript line-numbers">
+                    const mysql = require('mysql');
+
+                    console.log("Base de datos conectada")
+                    
+                    const connection = mysql.createConnection({
+                      host: 'tu-host',
+                      user: 'usuario',
+                      password: 'contrasena',
+                      port: 3306,
+                      database: 'database'
+                    });
+                    
+                    module.exports = connection;
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button">
+              Empezamos con el Crud
+            </button>
+          </h2>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#four" aria-expanded="true" aria-controls="CollapseOne">
+              Crear
+            </button>
+          </h2>
+
+          <div id="four" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              <pre><code class="language-javascript line-numbers">
+                    if (results.length === 0) {
+                    console.log("agregando usuario")
+                    conn.query('INSERT INTO usuariosdb (username, id_user, discriminator, avatar, pais_ciudad, urlpersonalizada, bio, facebook, twitter, youtube, web, sdiscord) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [data.username, data.id, data.discriminator, data.avatar, null, data.id, null, null, null, null, null, null], function (error, results, fields) {
+                      if (error) throw error;
+                      // Neat!
+                    });
+                    console.log("Nuevo Usuario");
+                  } else {
+                    console.log("Usuario ya Registrado");
+                  }
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#five" aria-expanded="true" aria-controls="CollapseOne">
+              Leer
+            </button>
+          </h2>
+
+          <div id="five" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              <pre><code class="language-javascript line-numbers">
+                    router.get("/", async function(req, res) {
+                    
+                      const DatoUsers = new Promise((resolve, reject) => {
+                        conn.query(`SELECT * FROM usuariosdb`, (error, results, fields) => {
+                          if (error) {
+                            return reject(error);
+                          }
+                          resolve(results)
+                        });
+                      });
+                    
+                      DatoUsers.then(data => {
+                        let UserData = data
+                    
+                        res.render("panel/index.ejs",
+                          {
+                            userDB: UserData
+                          });
+                      });
+                    })
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#six" aria-expanded="true" aria-controls="CollapseOne">
+              Actualizar
+            </button>
+          </h2>
+
+          <div id="six" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              <pre><code class="language-javascript line-numbers">
+                    .post("/:id/update", auth, async(req, res) => {
+
+                    let iduser = req.params.id;
+                    let urlper = req.body.urlper;
+                    let paci = req.body.paci;
+                    let bio = req.body.bio;
+                    let facebook = req.body.facebook;
+                    let twitter = req.body.twitter;
+                    let youtube = req.body.youtube;
+                    let discord = req.body.discord;
+                    let web = req.body.web
+                  
+                    const DatoUsers = new Promise((resolve,
+                      reject) => {
+                      conn.query(`SELECT * FROM usuariosdb WHERE id_user = '${iduser}'`,
+                        (error,
+                          results,
+                          fields) => {
+                          if (error) {
+                            return reject(error);
+                          }
+                          resolve(results)
+                        });
+                    });
+                  
+                    let UserData = await DatoUsers;
+                  
+                    if (!urlper && !paci && !bio && !facebook && !twitter && !youtube && !discord && !web) {
+                      urlper = UserData.urlper;
+                      paci = UserData.paci;
+                      bio = UserData.bio;
+                      facebook = UserData.facebook;
+                      twitter = UserData.twitter;
+                      youtube = UserData.youtube;
+                      discord = UserData.discord;
+                      web = UserData.web;
+                    }
+                  
+                    conn.query(`UPDATE usuariosdb SET urlpersonalizada = '${urlper}', pais_ciudad = '${paci}', bio = '${bio}', facebook = '${facebook}', twitter = '${twitter}', youtube = '${youtube}', sdiscord = '${discord}', web = '${web}'  WHERE id_user = '${iduser}'`, (error,
+                      results,
+                      fields) => {
+                      if (error) throw error;
+                      res.redirect('/perfil')
+                    });
+                  
+                  })
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#seven" aria-expanded="true" aria-controls="CollapseOne">
+              Eliminar
+            </button>
+          </h2>
+
+          <div id="seven" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              <pre><code class="language-javascript line-numbers">
+                    .get('/delete/:id', function(req, res, next) {
+
+                    let id = req.params.id;
+                    console.log(id)
+                     
+                    conn.query('DELETE FROM usuariosdb WHERE id = ' + id, function(error, results, fields) {
+                        //if(err) throw err
+                        if (error) {
+                            // set flash message
+                            throw error;
+                        } else {
+                            console.log("Eliminado")
+                            // redirect to books page
+                            res.redirect('/panel')
+                        }
+                    })
+                })
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<%- include('../_footer'); %>

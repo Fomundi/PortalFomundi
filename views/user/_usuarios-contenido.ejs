@@ -1,0 +1,86 @@
+  <div class="container-fluid">
+  <div class="puser">
+   
+   
+  <% if(userDB.avatar) { %>
+    <img class="img-fluid rounded-circle" src="https://cdn.discordapp.com/avatars/<%= userDB.id_user %>/<%= userDB.avatar %>.png"><span class="nivel badge rounded-pill bg-secondary text-center"><p class="textnivel"><%= userDB.nivel %></p></span>
+    
+  <% } else { %> 
+    <img class="img-fluid rounded-circle" src="https://images-ext-1.discordapp.net/external/NAqkMZNPJgDiWBrSDqniAD1_sbWfiPqF4mgZyCtVs6s/https/discordapp.com/assets/6debd47ed13483642cf09e832ed0bc1b.png?width=231&height=231" width="200px" height="200px" alt=""><span class="nivel badge rounded-pill bg-secondary text-center"><p class="textnivel"><%= userDB.nivel %></p></span>
+ <% } %>
+    <h3><%= userDB.username %></h3>
+    
+  </div>
+  
+  
+  <div class="row">
+    <div class="col-12 col-md-4">
+      
+      <div class="bioper">
+      
+      <a data-bs-toggle="tooltip" data-bs-placement="top" title="Información/Biografia del usuario.">BIO:</a>
+      <p><%= userDB.bio %></p>
+      
+      <% if (userDB !== "" && userDB.facebook !== "") { %>
+      <a href="<%= userDB.facebook %>"><i class="fab fa-facebook-square"></i></a>
+    <% } %>
+    <% if (userDB !== "" && userDB.twitter !== "") { %>
+      <a href="<%= userDB.twitter %>"><i class="fab fa-twitter"></i></a>
+    <% } %>
+    <% if (userDB !== "" && userDB.youtube !== "") { %>
+      <a href="<%= userDB.youtube %>"><i class="fab fa-youtube"></i></a>
+    <% } %>
+    <% if (userDB !== "" && userDB.web !== "") { %>
+      <a href="<%= userDB.web %>"><i class="fab fa-chrome"></i></a>
+    <% } %>
+    <% if (userDB !== "" && userDB.sdiscord !== "") { %>
+      <a href="<%= userDB.sdiscord %>"><i class="fab fa-discord"></i></a>
+    <% } %>
+    
+    <p><span class="icon icon-location2"></span>        <%= userDB.pais_ciudad %></p>
+    
+    <h5>Logros Próximamente</h5>
+      
+      </div>
+      
+    </div>
+    <div class="col-12 col-md-8">
+      
+      <div class="tabsuser">
+        
+      <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="messages-tab" data-bs-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Messages</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes
+      <div class="tab-content">
+        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          Titulo 1
+        </div>
+        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          Titulo 2
+        </div>
+        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+          Titlo 3
+        </div>
+        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+          Titulo 4
+        </div>
+      </div>-->
+
+    </div>
+      
+    </div>
+  </div>
+  </div>

@@ -1,0 +1,358 @@
+<%- include('../_head'); %>
+
+  <%- include('../_lateral'); %>
+
+    <h3 class="sqltxt">Guia Mongodb</h3>
+
+    <div class="acorguia">
+      <div class="accordion" id="EpicExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#one" aria-expanded="true" aria-controls="CollapseOne">
+              Que es Mysql?
+            </button>
+          </h2>
+
+          <div id="one" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              MongoDB es una base de datos de documentos que ofrece una gran escalabilidad y flexibilidad, y un modelo de consultas e indexación avanzado.
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#two" aria-expanded="true" aria-controls="CollapseOne">
+              Que es un controller?
+            </button>
+          </h2>
+
+          <div id="two" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              
+              Un controlador se puede definir como la entidad que se encargará de manipular los modelos e iniciar el proceso de renderizado de la vista con los datos recibidos de los modelos correspondientes. 
+              
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button">
+              Empezamos con la configuración
+            </button>
+          </h2>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#three" aria-expanded="true" aria-controls="CollapseOne">
+              Archivo principal (index.js)
+            </button>
+          </h2>
+
+          <div id="three" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              <pre><code class="language-javascript line-numbers">
+                    require('./database');
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#four" aria-expanded="true" aria-controls="CollapseOne">
+              Archivo controller
+            </button>
+          </h2>
+
+          <div id="four" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              Creamos una carpeta controller y ahi dentro creamos un archivo para lo que se va a usar, si es para usuarios, o notas etc. y lo ouedes hacer asi notes.controller.js (ATENCIÓN: dentro del archivo deben de ester el crud "Crear, leer, actualizar y eliminar")
+                  <pre><code class="language-javascript line-numbers">
+                    const notesCtrl = {};
+                    const Note = require("../models/Note");
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#five" aria-expanded="true" aria-controls="CollapseOne">
+              Archivo config.js
+            </button>
+          </h2>
+
+          <div id="five" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              <pre><code class="language-javascript line-numbers">
+                    module.exports = {
+                    PORT: process.env.PORT || 4000,
+                    MONGODB_HOST: process.env.MONGODB_HOST || 'localhost',
+                    MONGODB_DATABASE: process.env.MONGODB_DB || 'notes-app'
+                    }
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#six" aria-expanded="true" aria-controls="CollapseOne">
+              Archivo rutas
+            </button>
+          </h2>
+
+          <div id="six" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              <pre><code class="language-javascript line-numbers">
+                    const express = require("express");
+                    const router = express.Router();
+
+                    // Controller
+                    const {
+                    renderNoteForm,
+                    createNewNote,
+                    renderNotes,
+                    renderEditForm,
+                    updateNote,
+                    deleteNote
+                    } = require("../controllers/notes.controller");
+
+                    // New Note
+                    router.get("/notes/add", renderNoteForm);
+
+                    router.post("/notes/new-note", createNewNote);
+
+                    // Get All Notes
+                    router.get("/notes", renderNotes);
+
+                    // Edit Notes
+                    router.get("/notes/edit/:id", renderEditForm);
+
+                    router.put("/notes/edit-note/:id", updateNote);
+
+                    // Delete Notes
+                    router.delete("/notes/delete/:id", deleteNote);
+
+                    module.exports = router;
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#seven" aria-expanded="true" aria-controls="CollapseOne">
+              Creacion y configuración de la base de datos
+            </button>
+          </h2>
+
+          <div id="seven" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              Creamos un archivo llamado database.js donde ahí estará la conexion a nuestra base de datos.
+                  <br>
+                  <br>
+                  Primero, necesitamos definir una conexión. Si su aplicación usa solo una base de datos, debe usar mongoose.connect.
+                  <br>
+                  <br>
+                    Ambos connect y createConnection toman un mongodb://URI, o los parámetros host, database, port, options.
+                  <pre><code class="language-javascript line-numbers">
+                    const mongoose = require("mongoose");
+                    const config = require("./config");
+
+                    const MONGODB_URI = 'TU_BASE_DE_DATOS';
+
+                    mongoose
+                    .connect(MONGODB_URI, {
+                    useNewUrlParser: true,
+                    useUnifiedTopology: true,
+                    useFindAndModify: false,
+                    useCreateIndex: true,
+                    })
+                    .then((db) => console.log("Mongodb is connected to", db.connection.host))
+                    .catch((err) => console.error(err));
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#eight" aria-expanded="true" aria-controls="CollapseOne">
+              Modelo
+            </button>
+          </h2>
+
+          <div id="eight" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              Creamos una carpeta llamada models o modelos y abi dentro creamos un archivo con el nombre que deseas.
+                  <pre><code class="language-javascript line-numbers">
+                    const { Schema, model } = require("mongoose");
+
+                    const NoteSchema = new Schema(
+                    {
+                    Campo_1: {
+                    type: String,
+                    required: true
+                    },
+                    Campo_2: {
+                    type: String,
+                    required: true
+                    },
+                    Campo_3: {
+                    type: String,
+                    required: true
+                    }
+                    },
+                    {
+                    timestamps: true
+                    }
+                    );
+
+                    module.exports = model("Note", NoteSchema);
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#neun" aria-expanded="true" aria-controls="CollapseOne">
+              Crear
+            </button>
+          </h2>
+
+          <div id="neun" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              <pre><code class="language-javascript line-numbers">
+                    notesCtrl.renderNoteForm = (req, res) => {
+                    res.render("notes/new-note");
+                    };
+
+                    notesCtrl.createNewNote = async (req, res) => {
+                    const { title, description } = req.body;
+                    const errors = [];
+                    if (!Campo_1) {
+                    errors.push({ text: "Por favor escribe un Campo_1." });
+                    }
+                    if (!Campo_2) {
+                    errors.push({ text: "Por favor escribe una Campo_2" });
+                    }
+                    if (errors.length > 0) {
+                    res.render("notes/new-note", {
+                    errors,
+                    Campo_1,
+                    Campo_2,
+                    });
+                    } else {
+                    const newNote = new Note({ Campo_1, Campo_2 });
+                    newNote.user = req.user.id;
+                    await newNote.save();
+                    res.redirect("/notes");
+                    }
+                    };
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#ten" aria-expanded="true" aria-controls="CollapseOne">
+              Leer
+            </button>
+          </h2>
+
+          <div id="ten" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              <pre><code class="language-javascript line-numbers">
+                    notesCtrl.renderNotes = async (req, res) => {
+                    const notes = await Note.find({ user: req.user.id })
+                    .sort({ date: "desc" })
+                    .lean();
+                    res.render("notes/all-notes", { notes });
+                    };
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#eleven" aria-expanded="true" aria-controls="CollapseOne">
+              Actualizar
+            </button>
+          </h2>
+
+          <div id="eleven" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              <pre><code class="language-javascript line-numbers">
+                    notesCtrl.renderEditForm = async (req, res) => {
+                    const note = await Note.findById(req.params.id).lean();
+                    if (note.user != req.user.id) {
+                    return res.redirect("/notes");
+                    }
+                    res.render("notes/edit-note", { note });
+                    };
+
+                    notesCtrl.updateNote = async (req, res) => {
+                    const { Campo_1, Campo_2 } = req.body;
+                    await Note.findByIdAndUpdate(req.params.id, { Campo_1, Campo_2 });
+                    res.redirect("/notes");
+                    };
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#twelve" aria-expanded="true" aria-controls="CollapseOne">
+              Eliminar
+            </button>
+          </h2>
+
+          <div id="twelve" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              <pre><code class="language-javascript line-numbers">
+                    notesCtrl.deleteNote = async (req, res) => {
+                    await Note.findByIdAndDelete(req.params.id);
+                    res.redirect("/notes");
+                    };
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="HeadingOne">
+            <button class="accordion-button" type="button" data-toggle="collapse" data-target="#thirteen" aria-expanded="true" aria-controls="CollapseOne">
+              Editar
+            </button>
+          </h2>
+
+          <div id="thirteen" class="accordion-collapse collapse" aria-labelledby="HeadingOne" data-parent="#EpicExample">
+            <div class="accordion-body">
+              <pre><code class="language-javascript line-numbers">
+                    notesCtrl.renderEditForm = async (req, res) => {
+                    const note = await Note.findById(req.params.id).lean();
+                    if (note.user != req.user.id) {
+                    req.flash("error_msg", "Not Authorized");
+                    return res.redirect("/notes");
+                    }
+                    res.render("notes/edit-note", { note });
+                    };
+                  </code></pre>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+      </div>
+    </div>
+
+<%- include('../_footer'); %>
